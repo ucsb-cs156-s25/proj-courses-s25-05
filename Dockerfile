@@ -23,6 +23,7 @@ ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 COPY . /home/app
 
 ENV PRODUCTION=true
+ENV NPM_CONFIG_LOGLEVEL=error
 RUN mvn \
    -B \
    -ntp \
