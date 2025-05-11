@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-s25/proj-courses-s25-05
 owner: ucsb-cs156-s25
 repo_name: proj-courses-s25-05
-pull_requests: []
+pull_requests: [{"author":{"id":"U_kgDOBm9Hyw","is_bot":false,"login":"SnowyMAT","name":""},"headRefName":"SnowyMAT-patch-1","number":21,"title":"Update README.md","url":"https://github.com/ucsb-cs156-s25/proj-courses-s25-05/pull/21"}]
