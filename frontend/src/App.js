@@ -99,7 +99,7 @@ function App() {
           path="/coursedetails/:qtr/:enrollCode"
           element={<CourseDetailsIndexPage />}
         />
-         <Route
+        <Route
           exact
           path="/generaleducation/search"
           element={<GESearchIndexPage />}
