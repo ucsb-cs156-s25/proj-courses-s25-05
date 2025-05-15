@@ -15,8 +15,7 @@ const Template = (args) => {
 };
 
 const mswHandlers = [
-  http.get("/api/UCSBAreas/all", () => {
-    // ADJUST FINAL API NAME
+  http.get("/api/UCSBAreas/all", () => {              // ADJUST FINAL API NAME
     return HttpResponse.json(allTheAreas, {
       status: 200,
     });
