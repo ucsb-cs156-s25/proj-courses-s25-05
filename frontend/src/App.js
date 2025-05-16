@@ -26,7 +26,7 @@ import CourseOverTimeBuildingsIndexPage from "main/pages/CourseOverTime/CourseOv
 
 import CourseDetailsIndexPage from "main/pages/CourseDetails/CourseDetailsIndexPage";
 
-import GESearchIndexPage from "main/pages/GeneralEducation/GESearchIndexPage";
+import GeneralEducationSearchPage from "main/pages/GeneralEducation/GeneralEducationSearchPage";
 
 function App() {
   const { data: currentUser } = useCurrentUser();
@@ -102,7 +102,7 @@ function App() {
         <Route
           exact
           path="/generaleducation/search"
-          element={<GESearchIndexPage />}
+          element={<GeneralEducationSearchPage />}
         />
       </Routes>
     </BrowserRouter>
