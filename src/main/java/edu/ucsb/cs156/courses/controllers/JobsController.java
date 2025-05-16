@@ -26,6 +26,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
+
 @Tag(name = "Jobs")
 @RequestMapping("/api/jobs")
 @RestController
@@ -199,5 +203,36 @@ public class JobsController extends ApiController {
   public Job launchUploadGradeData() {
     UploadGradeDataJob updateGradeDataJob = updateGradeDataJobFactory.create();
     return jobService.runAsJob(updateGradeDataJob);
+  }
+
+  @Operation(summary = "Paginated list of jobs")
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  @GetMapping("/paginated")
+  public Page<Job> paginatedJobs(
+      @Parameter(name = "page", description = "Page number", example = "0", required = true)
+      @RequestParam int page,
+      @Parameter(name = "pageSize", description = "Page size", example = "10", required = true)
+      @RequestParam int pageSize,
+      @Parameter(name = "sortField", description = "Sort field", example = "id", required = true)
+      @RequestParam String sortField,
+      @Parameter(name = "sortDirection", description = "Sort direction", example = "DESC", required = true)
+      @RequestParam String sortDirection
+  ) {
+    // Adjust allowed fields as needed
+    List<String> allowedSortFields = Arrays.asList("id", "status", "createdAt", "completedAt");
+    if (!allowedSortFields.contains(sortField)) {
+      throw new IllegalArgumentException(
+          String.format("%s is not a valid sort field. Valid values are %s", sortField, allowedSortFields));
+    }
+    List<String> allowedSortDirections = Arrays.asList("ASC", "DESC");
+    if (!allowedSortDirections.contains(sortDirection)) {
+      throw new IllegalArgumentException(
+          String.format("%s is not a valid sort direction. Valid values are %s", sortDirection, allowedSortDirections));
+    }
+
+    Direction direction = sortDirection.equals("DESC") ? Direction.DESC : Direction.ASC;
+    PageRequest pageRequest = PageRequest.of(page, pageSize, direction, sortField);
+
+    return jobsRepository.findAll(pageRequest);
   }
 }
