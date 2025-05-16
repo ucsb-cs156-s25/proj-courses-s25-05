@@ -49,9 +49,9 @@ describe("SingleAreaDropdown tests", () => {
       />,
     );
 
-    const areaA = "sad1-option-A";
-    const areaB = "sad1-option-B";
-    const areaC = "sad1-option-C";
+    const areaA = "sad1-option-A1-ENGR";
+    const areaB = "sad1-option-B-L&S";
+    const areaC = "sad1-option-C-L&S";
 
     // Check that blanks are replaced with hyphens
     await waitFor(() => expect(screen.getByTestId(areaA).toBeInTheDocument));
@@ -84,19 +84,25 @@ describe("SingleAreaDropdown tests", () => {
     expect(allOption).toHaveTextContent("ALL");
 
     // ensure other options are present
-    const firstAreaAreaOption = await screen.findByTestId("sad1-option-A");
+    const firstAreaAreaOption = await screen.findByTestId(
+      "sad1-option-A1-ENGR",
+    );
     expect(firstAreaAreaOption).toBeInTheDocument();
     expect(firstAreaAreaOption).toHaveTextContent(
-      "A - English Reading and Composition",
+      "A1 - English Reading & Composition (ENGR)",
     );
 
-    const secondAreaAreaOption = await screen.findByTestId("sad1-option-B");
+    const secondAreaAreaOption = await screen.findByTestId("sad1-option-B-L&S");
     expect(secondAreaAreaOption).toBeInTheDocument();
-    expect(secondAreaAreaOption).toHaveTextContent("B - Foreign Language");
+    expect(secondAreaAreaOption).toHaveTextContent(
+      "B - Foreign Language (L&S)",
+    );
 
-    const thirdAreaAreaOption = await screen.findByTestId("sad1-option-C");
+    const thirdAreaAreaOption = await screen.findByTestId("sad1-option-C-L&S");
     expect(thirdAreaAreaOption).toBeInTheDocument();
-    expect(thirdAreaAreaOption).toHaveTextContent("C");
+    expect(thirdAreaAreaOption).toHaveTextContent(
+      "C - Science, Math and Technology (L&S)",
+    );
   });
 
   test('"ALL" option is not available when showAll is false', () => {
@@ -150,9 +156,9 @@ describe("SingleAreaDropdown tests", () => {
       await screen.findByLabelText("General Education Area"),
     ).toBeInTheDocument();
 
-    const selectQuarter = screen.getByLabelText("General Education Area");
-    userEvent.selectOptions(selectQuarter, "C");
-    expect(setArea).toBeCalledWith("C");
+    const selectArea = screen.getByLabelText("General Education Area");
+    userEvent.selectOptions(selectArea, "C-L&S");
+    expect(setArea).toBeCalledWith("C-L&S");
   });
 
   test('when I select "ALL" option, value changes to "ALL"', async () => {
@@ -174,7 +180,7 @@ describe("SingleAreaDropdown tests", () => {
     expect(setArea).toBeCalledWith("ALL");
   });
 
-  test("out of order areas is sorted by area letter", async () => {
+  test("out of order areas are sorted", async () => {
     render(
       <SingleAreaDropdown
         areas={outOfOrderAreas}
@@ -184,11 +190,37 @@ describe("SingleAreaDropdown tests", () => {
     );
 
     expect(
-      await screen.findByText("General Education Area"),
+      await screen.findByLabelText("General Education Area"),
     ).toBeInTheDocument();
+
+    const options = screen.getAllByRole("option");
+    const optionTexts = options.map((option) => option.textContent);
+    const expectedOrder = [
+      "A1 - English Reading & Composition (ENGR)",
+      "A1 - English Reading & Composition (L&S)",
+      "A2 - English Reading & Composition (L&S)",
+      "C - Science, Math and Technology (L&S)",
+    ];
+
+    expect(optionTexts).toEqual(expectedOrder);
+  });
+
+  test("areas do not contain '- L&S'", async () => {
+    render(
+      <SingleAreaDropdown
+        areas={threeAreas}
+        setArea={setArea}
+        controlId="sad1"
+      />,
+    );
+
     expect(
-      screen.getByText("A - English Reading and Composition"),
-    ).toHaveAttribute("data-testid", "sad1-option-A");
+      await screen.findByLabelText("General Education Area"),
+    ).toBeInTheDocument();
+    const options = screen.getAllByRole("option");
+    options.forEach((option) => {
+      expect(option.textContent).not.toContain("- L&S");
+    });
   });
 
   test("if I pass a non-null onChange, it gets called when the value changes", async () => {
@@ -207,13 +239,13 @@ describe("SingleAreaDropdown tests", () => {
     ).toBeInTheDocument();
 
     const selectArea = screen.getByLabelText("General Education Area");
-    userEvent.selectOptions(selectArea, "C");
-    await waitFor(() => expect(setArea).toBeCalledWith("C"));
+    userEvent.selectOptions(selectArea, "B-L&S");
+    await waitFor(() => expect(setArea).toBeCalledWith("B-L&S"));
     await waitFor(() => expect(onChange).toBeCalledTimes(1));
 
     // x.mock.calls[0][0] is the first argument of the first call to the jest.fn() mock x
     const event = onChange.mock.calls[0][0];
-    expect(event.target.value).toBe("C");
+    expect(event.target.value).toBe("B-L&S");
   });
 
   test('onChange is called when value is "ALL"', async () => {
@@ -264,7 +296,7 @@ describe("SingleAreaDropdown tests", () => {
       />,
     );
 
-    const expectedKey = "sad1-option-A";
+    const expectedKey = "sad1-option-A1-ENGR";
     await waitFor(() =>
       expect(screen.getByTestId(expectedKey).toBeInTheDocument),
     );
@@ -272,7 +304,9 @@ describe("SingleAreaDropdown tests", () => {
 
   test("when localstorage has a value, it is passed to useState", async () => {
     const getItemSpy = jest.spyOn(Storage.prototype, "getItem");
-    getItemSpy.mockImplementation(() => "C");
+    getItemSpy.mockImplementation(
+      () => "C - Science, Math and Technology (L&S)",
+    );
 
     const setAreaStateSpy = jest.fn();
     useState.mockImplementation((x) => [x, setAreaStateSpy]);
@@ -285,7 +319,9 @@ describe("SingleAreaDropdown tests", () => {
       />,
     );
 
-    await waitFor(() => expect(useState).toBeCalledWith("C"));
+    await waitFor(() =>
+      expect(useState).toBeCalledWith("C - Science, Math and Technology (L&S)"),
+    );
   });
 
   test("when localstorage has no value, first element of area list is passed to useState", async () => {

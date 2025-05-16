@@ -28,7 +28,19 @@ const SingleAreaDropdown = ({
     }
   };
 
-  areas.sort((a, b) => a[0].localeCompare(b[0]));
+  // Remove duplicates from the areas array
+  const uniqueAreas = Array.from(
+    new Map(
+      areas.map((item) => [
+        `${item.requirementCode}-${item.collegeCode}`,
+        item,
+      ]),
+    ).values(),
+  );
+
+  uniqueAreas.sort((a, b) =>
+    a.requirementCode.localeCompare(b.requirementCode),
+  );
 
   return (
     <Form.Group controlId={controlId}>
@@ -39,11 +51,23 @@ const SingleAreaDropdown = ({
             ALL
           </option>
         )}
-        {areas.map(function (object) {
-          const key = `${controlId}-option-${object[0]}`;
+        {uniqueAreas.map((object) => {
+          const key = `${controlId}-option-${object.requirementCode}-${object.collegeCode}`;
+
+          // Remove "-L&S" or "-Engr" from requirementTranslation if they exist
+          const cleanedTranslation = object.requirementTranslation.replace(
+            / - L&S| - Engr/gi,
+            "",
+          );
+
           return (
-            <option key={key} data-testid={key} value={object[0]}>
-              {object[0]} - {object[1]}
+            <option
+              key={key}
+              data-testid={key}
+              value={`${object.requirementCode}-${object.collegeCode}`}
+            >
+              {object.requirementCode} - {cleanedTranslation} (
+              {object.collegeCode})
             </option>
           );
         })}
