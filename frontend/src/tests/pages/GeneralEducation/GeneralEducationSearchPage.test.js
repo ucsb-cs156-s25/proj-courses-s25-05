@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import GESearchIndexPage from "main/pages/GeneralEducation/GESearchIndexPage";
+import GeneralEducationSearchPage from "main/pages/GeneralEducation/GeneralEducationSearchPage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 
@@ -8,7 +8,7 @@ import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 
-describe("GESearchIndexPage tests", () => {
+describe("GeneralEducationSearchPage tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
 
   const setupUserOnly = () => {
@@ -33,7 +33,7 @@ describe("GESearchIndexPage tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <GESearchIndexPage />
+          <GeneralEducationSearchPage />
         </MemoryRouter>
       </QueryClientProvider>,
     );

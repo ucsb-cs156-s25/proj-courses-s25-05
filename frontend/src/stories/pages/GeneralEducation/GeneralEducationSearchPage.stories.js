@@ -1,16 +1,16 @@
 import React from "react";
-import GESearchIndexPage from "main/pages/GeneralEducation/GESearchIndexPage";
+import GeneralEducationSearchPage from "main/pages/GeneralEducation/GeneralEducationSearchPage";
 
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 
 import { http, HttpResponse } from "msw";
 
 export default {
-  title: "pages/GeneralEducation/GESearchIndexPage",
-  component: GESearchIndexPage,
+  title: "pages/GeneralEducation/GeneralEducationSearchPage",
+  component: GeneralEducationSearchPage,
 };
 
-const Template = () => <GESearchIndexPage />;
+const Template = () => <GeneralEducationSearchPage />;
 
 export const Default = Template.bind({});
 Default.parameters = {
