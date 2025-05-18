@@ -55,4 +55,45 @@ public class CourseOverTimeBuildingController {
     String body = mapper.writeValueAsString(courseResults);
     return ResponseEntity.ok().body(body);
   }
+
+@Operation(summary = "Get a list of courses over time, filtered by (abbreviated) building code and room number")
+  @GetMapping(value = "/buildingandroomsearch", produces = "application/json")
+  public ResponseEntity<String> search(
+      @Parameter(
+              name = "startQtr",
+              description =
+                  "Starting quarter in yyyyq format, e.g. 20231 for W23, 20232 for S23, etc. (1=Winter, 2=Spring, 3=Summer, 4=Fall)",
+              example = "20231",
+              required = true)
+          @RequestParam
+          String startQtr,
+      @Parameter(
+              name = "endQtr",
+              description =
+                  "Ending quarter in yyyyq format, e.g. 20231 for W23, 20232 for S23, etc. (1=Winter, 2=Spring, 3=Summer, 4=Fall)",
+              example = "20231",
+              required = true)
+          @RequestParam
+          String endQtr,
+      @Parameter(
+              name = "buildingCode",
+              description = "Building code such as PHELP for Phelps, GIRV for Girvetz",
+              example = "GIRV",
+              required = true)
+          @RequestParam
+          String buildingCode,
+      @Parameter(
+              name = "roomNumber",
+              description = "Room number",
+              example = "1001",
+              required = true)
+            @RequestParam
+            String roomNumber)
+      throws JsonProcessingException {
+    List<ConvertedSection> courseResults =
+        convertedSectionCollection.findByQuarterRangeAndBuildingCodeAndRoom(
+            startQtr, endQtr, buildingCode, roomNumber);
+    String body = mapper.writeValueAsString(courseResults);
+    return ResponseEntity.ok().body(body);
+  }
 }
