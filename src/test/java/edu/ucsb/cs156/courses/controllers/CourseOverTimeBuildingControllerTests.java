@@ -36,7 +36,7 @@ public class CourseOverTimeBuildingControllerTests {
   @MockBean ConvertedSectionCollection convertedSectionCollection;
 
   @Test
-  public void test_search_emptyRequest() throws Exception {
+  public void test_search_building_emptyRequest() throws Exception {
     List<ConvertedSection> expectedResult = new ArrayList<ConvertedSection>();
     String urlTemplate =
         "/api/public/courseovertime/buildingsearch?startQtr=%s&endQtr=%s&buildingCode=%s";
@@ -63,7 +63,7 @@ public class CourseOverTimeBuildingControllerTests {
   }
 
   @Test
-  public void test_search_validRequestWithoutSuffix() throws Exception {
+  public void test_search_building_validRequestWithoutSuffix() throws Exception {
     CourseInfo info =
         CourseInfo.builder()
             .quarter("20222")
@@ -91,6 +91,73 @@ public class CourseOverTimeBuildingControllerTests {
     // mock
     when(convertedSectionCollection.findByQuarterRangeAndBuildingCode(
             any(String.class), any(String.class), eq("GIRV")))
+        .thenReturn(expectedSecs);
+
+    // act
+    MvcResult response = mockMvc.perform(get(url)).andExpect(status().isOk()).andReturn();
+
+    // assert
+    String expectedString = mapper.writeValueAsString(expectedSecs);
+    String responseString = response.getResponse().getContentAsString();
+    assertEquals(expectedString, responseString);
+  }
+
+  @Test
+  public void test_search_buildingAndRoom_emptyRequest() throws Exception {
+    List<ConvertedSection> expectedResult = new ArrayList<ConvertedSection>();
+    String urlTemplate =
+        "/api/public/courseovertime/buildingandroomsearch?startQtr=%s&endQtr=%s&buildingCode=%s&roomNumber=%s";
+
+    String url = String.format(urlTemplate, "20221", "20222", "Storke Tower", "1001");
+
+    // mock
+    when(convertedSectionCollection.findByQuarterRangeAndBuildingCodeAndRoom(
+            any(String.class), any(String.class), any(String.class), any(String.class)))
+        .thenReturn(expectedResult);
+
+    // act
+    MvcResult response =
+        mockMvc
+            .perform(get(url).contentType("application/json"))
+            .andExpect(status().isOk())
+            .andReturn();
+
+    // assert
+    String responseString = response.getResponse().getContentAsString();
+    String expectedString = mapper.writeValueAsString(expectedResult);
+
+    assertEquals(expectedString, responseString);
+  }
+
+  @Test
+  public void test_search_buildingAndRoom_validRequestWithoutSuffix() throws Exception {
+    CourseInfo info =
+        CourseInfo.builder()
+            .quarter("20222")
+            .courseId("CMPSC   24 -1")
+            .title("OBJ ORIENTED DESIGN")
+            .description("Intro to object oriented design")
+            .build();
+
+    Section section1 = new Section();
+
+    Section section2 = new Section();
+
+    ConvertedSection cs1 = ConvertedSection.builder().courseInfo(info).section(section1).build();
+
+    ConvertedSection cs2 = ConvertedSection.builder().courseInfo(info).section(section2).build();
+
+    String urlTemplate =
+        "/api/public/courseovertime/buildingandroomsearch?startQtr=%s&endQtr=%s&buildingCode=%s&roomNumber=%s";
+
+    String url = String.format(urlTemplate, "20221", "20222", "GIRV", "1001");
+
+    List<ConvertedSection> expectedSecs = new ArrayList<ConvertedSection>();
+    expectedSecs.addAll(Arrays.asList(cs1, cs2));
+
+    // mock
+    when(convertedSectionCollection.findByQuarterRangeAndBuildingCodeAndRoom(
+            any(String.class), any(String.class), eq("GIRV"), eq("1001")))
         .thenReturn(expectedSecs);
 
     // act
