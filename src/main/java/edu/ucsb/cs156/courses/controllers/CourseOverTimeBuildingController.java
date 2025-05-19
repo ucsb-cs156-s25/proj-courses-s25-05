@@ -56,7 +56,9 @@ public class CourseOverTimeBuildingController {
     return ResponseEntity.ok().body(body);
   }
 
-@Operation(summary = "Get a list of courses over time, filtered by (abbreviated) building code and room number")
+  @Operation(
+      summary =
+          "Get a list of courses over time, filtered by (abbreviated) building code and room number")
   @GetMapping(value = "/buildingandroomsearch", produces = "application/json")
   public ResponseEntity<String> search(
       @Parameter(
@@ -87,8 +89,8 @@ public class CourseOverTimeBuildingController {
               description = "Room number",
               example = "1001",
               required = true)
-            @RequestParam
-            String roomNumber)
+          @RequestParam
+          String roomNumber)
       throws JsonProcessingException {
     List<ConvertedSection> courseResults =
         convertedSectionCollection.findByQuarterRangeAndBuildingCodeAndRoom(
