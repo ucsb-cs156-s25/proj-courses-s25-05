@@ -838,7 +838,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>@Operation(summary = &#34;Get a list of courses over time, filtered by (abbreviated) building code and room number&#34;)</span></pre></td></tr>
+<td class=''><pre><span  class=''>  @Operation(</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -852,7 +852,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>  @GetMapping(value = &#34;/buildingandroomsearch&#34;, produces = &#34;application/json&#34;)</span></pre></td></tr>
+<td class=''><pre><span  class=''>      summary =</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -866,7 +866,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>  public ResponseEntity&#60;String&#62; search(</span></pre></td></tr>
+<td class=''><pre><span  class=''>          &#34;Get a list of courses over time, filtered by (abbreviated) building code and room number&#34;)</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -880,7 +880,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>      @Parameter(</span></pre></td></tr>
+<td class=''><pre><span  class=''>  @GetMapping(value = &#34;/buildingandroomsearch&#34;, produces = &#34;application/json&#34;)</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -894,7 +894,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>              name = &#34;startQtr&#34;,</span></pre></td></tr>
+<td class=''><pre><span  class=''>  public ResponseEntity&#60;String&#62; search(</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -908,7 +908,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>              description =</span></pre></td></tr>
+<td class=''><pre><span  class=''>      @Parameter(</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -922,7 +922,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>                  &#34;Starting quarter in yyyyq format, e.g. 20231 for W23, 20232 for S23, etc. (1=Winter, 2=Spring, 3=Summer, 4=Fall)&#34;,</span></pre></td></tr>
+<td class=''><pre><span  class=''>              name = &#34;startQtr&#34;,</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -936,7 +936,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>              example = &#34;20231&#34;,</span></pre></td></tr>
+<td class=''><pre><span  class=''>              description =</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -950,7 +950,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>              required = true)</span></pre></td></tr>
+<td class=''><pre><span  class=''>                  &#34;Starting quarter in yyyyq format, e.g. 20231 for W23, 20232 for S23, etc. (1=Winter, 2=Spring, 3=Summer, 4=Fall)&#34;,</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -964,7 +964,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>          @RequestParam</span></pre></td></tr>
+<td class=''><pre><span  class=''>              example = &#34;20231&#34;,</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -978,7 +978,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>          String startQtr,</span></pre></td></tr>
+<td class=''><pre><span  class=''>              required = true)</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -992,7 +992,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>      @Parameter(</span></pre></td></tr>
+<td class=''><pre><span  class=''>          @RequestParam</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1006,7 +1006,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>              name = &#34;endQtr&#34;,</span></pre></td></tr>
+<td class=''><pre><span  class=''>          String startQtr,</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1020,7 +1020,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>              description =</span></pre></td></tr>
+<td class=''><pre><span  class=''>      @Parameter(</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1034,7 +1034,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>                  &#34;Ending quarter in yyyyq format, e.g. 20231 for W23, 20232 for S23, etc. (1=Winter, 2=Spring, 3=Summer, 4=Fall)&#34;,</span></pre></td></tr>
+<td class=''><pre><span  class=''>              name = &#34;endQtr&#34;,</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1048,7 +1048,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>              example = &#34;20231&#34;,</span></pre></td></tr>
+<td class=''><pre><span  class=''>              description =</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1062,7 +1062,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>              required = true)</span></pre></td></tr>
+<td class=''><pre><span  class=''>                  &#34;Ending quarter in yyyyq format, e.g. 20231 for W23, 20232 for S23, etc. (1=Winter, 2=Spring, 3=Summer, 4=Fall)&#34;,</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1076,7 +1076,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>          @RequestParam</span></pre></td></tr>
+<td class=''><pre><span  class=''>              example = &#34;20231&#34;,</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1090,7 +1090,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>          String endQtr,</span></pre></td></tr>
+<td class=''><pre><span  class=''>              required = true)</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1104,7 +1104,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>      @Parameter(</span></pre></td></tr>
+<td class=''><pre><span  class=''>          @RequestParam</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1118,7 +1118,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>              name = &#34;buildingCode&#34;,</span></pre></td></tr>
+<td class=''><pre><span  class=''>          String endQtr,</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1132,7 +1132,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>              description = &#34;Building code such as PHELP for Phelps, GIRV for Girvetz&#34;,</span></pre></td></tr>
+<td class=''><pre><span  class=''>      @Parameter(</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1146,7 +1146,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>              example = &#34;GIRV&#34;,</span></pre></td></tr>
+<td class=''><pre><span  class=''>              name = &#34;buildingCode&#34;,</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1160,7 +1160,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>              required = true)</span></pre></td></tr>
+<td class=''><pre><span  class=''>              description = &#34;Building code such as PHELP for Phelps, GIRV for Girvetz&#34;,</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1174,7 +1174,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>          @RequestParam</span></pre></td></tr>
+<td class=''><pre><span  class=''>              example = &#34;GIRV&#34;,</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1188,7 +1188,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>          String buildingCode,</span></pre></td></tr>
+<td class=''><pre><span  class=''>              required = true)</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1202,7 +1202,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>      @Parameter(</span></pre></td></tr>
+<td class=''><pre><span  class=''>          @RequestParam</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1216,7 +1216,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>              name = &#34;roomNumber&#34;,</span></pre></td></tr>
+<td class=''><pre><span  class=''>          String buildingCode,</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1230,7 +1230,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>              description = &#34;Room number&#34;,</span></pre></td></tr>
+<td class=''><pre><span  class=''>      @Parameter(</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1244,7 +1244,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>              example = &#34;1001&#34;,</span></pre></td></tr>
+<td class=''><pre><span  class=''>              name = &#34;roomNumber&#34;,</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1258,7 +1258,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>              required = true)</span></pre></td></tr>
+<td class=''><pre><span  class=''>              description = &#34;Room number&#34;,</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1272,7 +1272,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>            @RequestParam</span></pre></td></tr>
+<td class=''><pre><span  class=''>              example = &#34;1001&#34;,</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1286,7 +1286,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>            String roomNumber)</span></pre></td></tr>
+<td class=''><pre><span  class=''>              required = true)</span></pre></td></tr>
 
 <tr>
 <td class='na'>
@@ -1300,10 +1300,10 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>      throws JsonProcessingException {</span></pre></td></tr>
+<td class=''><pre><span  class=''>          @RequestParam</span></pre></td></tr>
 
 <tr>
-<td class='covered'>
+<td class='na'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@7d518749_93'/>
 93
 </td>
@@ -1314,10 +1314,10 @@
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class=''>    List&#60;ConvertedSection&#62; courseResults =</span></pre></td></tr>
+<td class=''><pre><span  class=''>          String roomNumber)</span></pre></td></tr>
 
 <tr>
-<td class='covered'>
+<td class='na'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@7d518749_94'/>
 94
 </td>
@@ -1328,10 +1328,10 @@
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class=''>        convertedSectionCollection.findByQuarterRangeAndBuildingCodeAndRoom(</span></pre></td></tr>
+<td class=''><pre><span  class=''>      throws JsonProcessingException {</span></pre></td></tr>
 
 <tr>
-<td class='na'>
+<td class='covered'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@7d518749_95'/>
 95
 </td>
@@ -1342,7 +1342,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>            startQtr, endQtr, buildingCode, roomNumber);</span></pre></td></tr>
+<td class='covered'><pre><span  class=''>    List&#60;ConvertedSection&#62; courseResults =</span></pre></td></tr>
 
 <tr>
 <td class='covered'>
@@ -1356,26 +1356,24 @@
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class=''>    String body = mapper.writeValueAsString(courseResults);</span></pre></td></tr>
-
-<tr>
-<td class='covered'>
-<a name='org.pitest.mutationtest.report.html.SourceFile@7d518749_97'/>
-97
-</td>
-<td class='killed'>
-<span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7d518749_97'>1</a>
-<span>
-1. search : replaced return value with null for edu/ucsb/cs156/courses/controllers/CourseOverTimeBuildingController::search &rarr; KILLED<br/>
-
-</span>
-</span>
-</td>
-<td class='covered'><pre><span  class='killed'>    return ResponseEntity.ok().body(body);</span></pre></td></tr>
+<td class='covered'><pre><span  class=''>        convertedSectionCollection.findByQuarterRangeAndBuildingCodeAndRoom(</span></pre></td></tr>
 
 <tr>
 <td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7d518749_97'/>
+97
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7d518749_97'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            startQtr, endQtr, buildingCode, roomNumber);</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@7d518749_98'/>
 98
 </td>
@@ -1386,16 +1384,46 @@
 </span>
 </span>
 </td>
+<td class='covered'><pre><span  class=''>    String body = mapper.writeValueAsString(courseResults);</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7d518749_99'/>
+99
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7d518749_99'>1</a>
+<span>
+1. search : replaced return value with null for edu/ucsb/cs156/courses/controllers/CourseOverTimeBuildingController::search &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    return ResponseEntity.ok().body(body);</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7d518749_100'/>
+100
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7d518749_100'></a>
+<span>
+</span>
+</span>
+</td>
 <td class=''><pre><span  class=''>  }</span></pre></td></tr>
 
 <tr>
 <td class='na'>
-<a name='org.pitest.mutationtest.report.html.SourceFile@7d518749_99'/>
-99
+<a name='org.pitest.mutationtest.report.html.SourceFile@7d518749_101'/>
+101
 </td>
 <td class=''>
 <span class='pop'>
-<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7d518749_99'></a>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7d518749_101'></a>
 <span>
 </span>
 </span>
@@ -1418,11 +1446,11 @@
 </td>
 </tr>
 <tr>
-<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7d518749_97'>97</a></td> 
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7d518749_99'>99</a></td> 
 <td></td>
 <td>
 
-<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7d518749_97'/> 
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7d518749_99'/> 
 
 <p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>search<br/><b>Killed by : </b>edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests.[engine:junit-jupiter]/[class:edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests]/[method:test_search_buildingAndRoom_emptyRequest()]</span></span> replaced return value with null for edu/ucsb/cs156/courses/controllers/CourseOverTimeBuildingController::search &rarr; KILLED</span>
 </div> 
@@ -1450,7 +1478,7 @@
 
 <h2>Tests examined</h2>
 <ul>
-<li>edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests.[engine:junit-jupiter]/[class:edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests]/[method:test_search_buildingAndRoom_emptyRequest()] (6 ms)</li><li>edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests.[engine:junit-jupiter]/[class:edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests]/[method:test_search_buildingAndRoom_validRequestWithoutSuffix()] (40 ms)</li><li>edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests.[engine:junit-jupiter]/[class:edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests]/[method:test_search_building_emptyRequest()] (8 ms)</li><li>edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests.[engine:junit-jupiter]/[class:edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests]/[method:test_search_building_validRequestWithoutSuffix()] (11 ms)</li>
+<li>edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests.[engine:junit-jupiter]/[class:edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests]/[method:test_search_buildingAndRoom_emptyRequest()] (6 ms)</li><li>edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests.[engine:junit-jupiter]/[class:edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests]/[method:test_search_buildingAndRoom_validRequestWithoutSuffix()] (35 ms)</li><li>edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests.[engine:junit-jupiter]/[class:edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests]/[method:test_search_building_emptyRequest()] (6 ms)</li><li>edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests.[engine:junit-jupiter]/[class:edu.ucsb.cs156.courses.controllers.CourseOverTimeBuildingControllerTests]/[method:test_search_building_validRequestWithoutSuffix()] (9 ms)</li>
 </ul>
 
 <br/>
