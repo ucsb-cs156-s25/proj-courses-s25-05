@@ -55,46 +55,5 @@ import org.springframework.web.bind.annotation.RestController;
 <span class="fc" id="L55">    String body = mapper.writeValueAsString(courseResults);</span>
 <span class="fc" id="L56">    return ResponseEntity.ok().body(body);</span>
   }
-
-@Operation(summary = &quot;Get a list of courses over time, filtered by (abbreviated) building code and room number&quot;)
-  @GetMapping(value = &quot;/buildingandroomsearch&quot;, produces = &quot;application/json&quot;)
-  public ResponseEntity&lt;String&gt; search(
-      @Parameter(
-              name = &quot;startQtr&quot;,
-              description =
-                  &quot;Starting quarter in yyyyq format, e.g. 20231 for W23, 20232 for S23, etc. (1=Winter, 2=Spring, 3=Summer, 4=Fall)&quot;,
-              example = &quot;20231&quot;,
-              required = true)
-          @RequestParam
-          String startQtr,
-      @Parameter(
-              name = &quot;endQtr&quot;,
-              description =
-                  &quot;Ending quarter in yyyyq format, e.g. 20231 for W23, 20232 for S23, etc. (1=Winter, 2=Spring, 3=Summer, 4=Fall)&quot;,
-              example = &quot;20231&quot;,
-              required = true)
-          @RequestParam
-          String endQtr,
-      @Parameter(
-              name = &quot;buildingCode&quot;,
-              description = &quot;Building code such as PHELP for Phelps, GIRV for Girvetz&quot;,
-              example = &quot;GIRV&quot;,
-              required = true)
-          @RequestParam
-          String buildingCode,
-      @Parameter(
-              name = &quot;roomNumber&quot;,
-              description = &quot;Room number&quot;,
-              example = &quot;1001&quot;,
-              required = true)
-            @RequestParam
-            String roomNumber)
-      throws JsonProcessingException {
-<span class="fc" id="L93">    List&lt;ConvertedSection&gt; courseResults =</span>
-<span class="fc" id="L94">        convertedSectionCollection.findByQuarterRangeAndBuildingCodeAndRoom(</span>
-            startQtr, endQtr, buildingCode, roomNumber);
-<span class="fc" id="L96">    String body = mapper.writeValueAsString(courseResults);</span>
-<span class="fc" id="L97">    return ResponseEntity.ok().body(body);</span>
-  }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
