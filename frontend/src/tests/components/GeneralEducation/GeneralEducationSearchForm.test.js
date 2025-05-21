@@ -47,7 +47,7 @@ describe("GeneralEducationSearchForm tests", () => {
   });
 
   test("when I select an area, the state for area changes", () => {
-    axiosMock.onGet("/api/UCSBAreas/all").reply(200, allTheAreas); // ADJUST FINAL API NAME
+    axiosMock.onGet("/api/public/generalEducationInfo").reply(200, allTheAreas);
 
     render(
       <QueryClientProvider client={queryClient}>
@@ -62,7 +62,7 @@ describe("GeneralEducationSearchForm tests", () => {
   });
 
   test("when I click submit, the right stuff happens", async () => {
-    axiosMock.onGet("/api/UCSBAreas/all").reply(200, allTheAreas); // ADJUST FINAL API NAME
+    axiosMock.onGet("/api/public/generalEducationInfo").reply(200, allTheAreas);
     const sampleReturnValue = {
       sampleKey: "sampleValue",
     };
@@ -102,7 +102,7 @@ describe("GeneralEducationSearchForm tests", () => {
   });
 
   test("when I click submit when JSON is EMPTY, setCourse is not called!", async () => {
-    axiosMock.onGet("/api/UCSBAreas/all").reply(200, allTheAreas); // ADJUST FINAL API NAME
+    axiosMock.onGet("/api/public/generalEducationInfo").reply(200, allTheAreas);
 
     const sampleReturnValue = {
       sampleKey: "sampleValue",

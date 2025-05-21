@@ -1,30 +1,23 @@
 import { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
-import { allTheAreas } from "fixtures/areaFixtures";
-
-// import { useSystemInfo } from "main/utils/systemInfo";
 import SingleAreaDropdown from "main/components/Areas/SingleAreaDropdown";
-// import { useBackend } from "main/utils/useBackend";
+import { useBackend } from "main/utils/useBackend";
 
 const GeneralEducationSearchForm = ({ fetchJSON }) => {
-  // const { data: systemInfo } = useSystemInfo();
-
   // Stryker disable all : not sure how to test/mock local storage
   const localArea = localStorage.getItem("GeneralEducationSearch.Area");
 
-  // This is Jim's part
-  // For now, we are using a hardcoded fixture
-  // const {
-  //   data: areas,
-  //   error: _error,
-  //   status: _status,
-  // } = useBackend(
-  //   // Stryker disable next-line all : don't test internal caching of React Query
-  //   ["/api/UCSBGEAreas/all"],
-  //   { method: "GET", url: "/api/UCSBGEAreas/all" },        // ADJUST FINAL API NAME
-  //   [],
-  // );
+  const {
+    data: areas,
+    error: _error,
+    status: _status,
+  } = useBackend(
+    // Stryker disable next-line all : don't test internal caching of React Query
+    ["/api/public/generalEducationInfo"],
+    { method: "GET", url: "/api/public/generalEducationInfo" },
+    [],
+  );
 
   const [area, setArea] = useState(localArea || "A");
 
@@ -40,7 +33,7 @@ const GeneralEducationSearchForm = ({ fetchJSON }) => {
         <Row>
           <Col md="auto">
             <SingleAreaDropdown
-              areas={allTheAreas}
+              areas={areas}
               area={area}
               setArea={setArea}
               controlId={"GeneralEducationSearch.Area"}
