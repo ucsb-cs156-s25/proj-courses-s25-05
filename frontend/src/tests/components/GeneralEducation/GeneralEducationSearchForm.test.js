@@ -46,7 +46,7 @@ describe("GeneralEducationSearchForm tests", () => {
     );
   });
 
-  test("when I select an area, the state for area changes", () => {
+  test("when I select an area, the state for area changes", async () => {
     axiosMock.onGet("/api/public/generalEducationInfo").reply(200, allTheAreas);
 
     render(
@@ -56,6 +56,12 @@ describe("GeneralEducationSearchForm tests", () => {
         </MemoryRouter>
       </QueryClientProvider>,
     );
+
+    const expectedKey = "GeneralEducationSearch.Area-option-C-ENGR";
+    await waitFor(() =>
+      expect(screen.getByTestId(expectedKey).toBeInTheDocument),
+    );
+
     const selectArea = screen.getByLabelText("General Education Area");
     userEvent.selectOptions(selectArea, "C-ENGR");
     expect(selectArea.value).toBe("C-ENGR");
