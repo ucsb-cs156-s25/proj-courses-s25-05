@@ -186,7 +186,8 @@
 <a name='L121'></a><a href='#L121'>121</a>
 <a name='L122'></a><a href='#L122'>122</a>
 <a name='L123'></a><a href='#L123'>123</a>
-<a name='L124'></a><a href='#L124'>124</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -241,16 +242,12 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -263,8 +260,13 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -313,7 +315,7 @@
 import { useParams } from "react-router-dom";
 import PersonalSchedulesTable from "main/components/PersonalSchedules/PersonalSchedulesTable";
 import PersonalSectionsTable from "main/components/PersonalSections/PersonalSectionsTable";
-import PersonalSchedulesWeeklyView from "main/components/PersonalSchedulesWeeklyView/PersonalSchedulesWeeklyViewPanel"
+import PersonalSchedulesWeeklyView from "main/components/PersonalSchedulesWeeklyView/PersonalSchedulesWeeklyViewPanel";
 import { useBackend, _useBackendMutation } from "main/utils/useBackend";
 import { Button } from "react-bootstrap";
 import { useCurrentUser } from "main/utils/currentUser";
@@ -361,47 +363,48 @@ export default function PersonalSchedulesDetailsPage() {
   const dayParser = (dayString) =&gt; {
     dayString.replaceAll(" ", "");
     const dayArray = [];
-    for(let i = 0; i &lt; dayString.length; i++) {
-      if(dayString[i] === "M") {
+    for (let i = 0; i &lt; dayString.length; i++) {
+      if (dayString[i] === "M") {
         dayArray.push("Monday");
-      }
-      else <span class="missing-if-branch" title="if path not taken" >I</span>if(dayString[i] === "T") {
+      } else <span class="missing-if-branch" title="if path not taken" >I</span>if (dayString[i] === "T") {
 <span class="cstat-no" title="statement not covered" >        dayArray.push("Tuesday");</span>
-      }
-      else <span class="missing-if-branch" title="if path not taken" >I</span>if(dayString[i] === "W") {
+      } else <span class="missing-if-branch" title="if path not taken" >I</span>if (dayString[i] === "W") {
 <span class="cstat-no" title="statement not covered" >        dayArray.push("Wednesday");</span>
-      }
-      else <span class="missing-if-branch" title="if path not taken" >I</span>if(dayString[i] === "R") {
+      } else <span class="missing-if-branch" title="if path not taken" >I</span>if (dayString[i] === "R") {
 <span class="cstat-no" title="statement not covered" >        dayArray.push("Thursday");</span>
-      }
-      else <span class="missing-if-branch" title="if path not taken" >I</span>if(dayString[i] === "F") {
+      } else <span class="missing-if-branch" title="if path not taken" >I</span>if (dayString[i] === "F") {
 <span class="cstat-no" title="statement not covered" >        dayArray.push("Friday");</span>
       }
     }
     return dayArray;
-  }
+  };
 &nbsp;
   const eventParser = () =&gt; {
-    <span class="missing-if-branch" title="else path not taken" >E</span>if(personalSection !== undefined) {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (personalSection !== undefined) {
       return {
-        event: 
-          personalSection
-            .filter(section =&gt; section.classSections[0].timeLocations[0] !== undefined)
-            .map(section =&gt; ({
-              id: section.classSections[0].enrollCode.trim(),
-              title: section.courseId.replaceAll(" ", ""),
-              day: dayParser(section.classSections[0].timeLocations[0].days),
-              name: section.title,
-              description: section.description,
-              area: section.classSections[0].timeLocations[0].building.trim() + " " + section.classSections[0].timeLocations[0].room.trim(),
-              startTime: section.classSections[0].timeLocations[0].beginTime,
-              endTime: section.classSections[0].timeLocations[0].endTime,
+        event: personalSection
+          .filter(
+            (section) =&gt;
+              section.classSections[0].timeLocations[0] !== undefined,
+          )
+          .map((section) =&gt; ({
+            id: section.classSections[0].enrollCode.trim(),
+            title: section.courseId.replaceAll(" ", ""),
+            day: dayParser(section.classSections[0].timeLocations[0].days),
+            name: section.title,
+            description: section.description,
+            area:
+              section.classSections[0].timeLocations[0].building.trim() +
+              " " +
+              section.classSections[0].timeLocations[0].room.trim(),
+            startTime: section.classSections[0].timeLocations[0].beginTime,
+            endTime: section.classSections[0].timeLocations[0].endTime,
           })),
-      }
+      };
     }
-<span class="cstat-no" title="statement not covered" >    return {}</span>
-  }
-  
+<span class="cstat-no" title="statement not covered" >    return {};</span>
+  };
+&nbsp;
   return (
     &lt;BasicLayout&gt;
       &lt;div className="pt-2"&gt;
@@ -439,7 +442,7 @@ export default function PersonalSchedulesDetailsPage() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-22T22:24:02.968Z
+                at 2025-05-22T22:31:30.415Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
